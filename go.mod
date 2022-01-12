@@ -1,4 +1,4 @@
-module github.com/treaster/chbsname
+module github.com/treaster/correcthorse
 
 go 1.16
 

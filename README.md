@@ -1,4 +1,4 @@
-# chbsname
+# Correcthorse
 Generate strings like "correct-horse-battery-staple" (https://xkcd.com/936/), suitable for secure(?) passwords or other identification.
 
 No words list is provided. A list of words suitable for the calling application must be provided. If you need a words list, consider the Linux built-in dictionary (/usr/share/dict/words), or a Scrabble word list like https://www.wordgamedictionary.com/twl06/download/twl06.txt. Licensing on these specific files is unknown. Use your judgment.
@@ -9,7 +9,7 @@ package main
 
 import (
     "fmt"
-    "github.com/treaster/chbsname"
+    "github.com/treaster/correcthorse"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
         "goose",
     }
 
-    b, err := chbsname.NewBuilder(words, 3, 4)
+    b, err := correcthorse.NewBuilder(words, 3, 4)
     if err != nil {
         return err
     }
@@ -37,7 +37,7 @@ package main
 
 import (
     "fmt"
-    "github.com/treaster/chbsname"
+    "github.com/treaster/correcthorse"
 )
 
 func main() {
@@ -48,7 +48,7 @@ func main() {
         horse
         goose`))
 
-    b, err := chbsname.NewBuilderFromReader(words, 3, 4)
+    b, err := correcthorse.NewBuilderFromReader(words, 3, 4)
     if err != nil {
         return err
     }
@@ -63,11 +63,11 @@ package main
 
 import (
     "fmt"
-    "github.com/treaster/chbsname"
+    "github.com/treaster/correcthorse"
 )
 
 func main() {
-    b, err := chbsname.NewBuilderFromFile("/path/to/wordlist.txt", 3, 4)
+    b, err := correcthorse.NewBuilderFromFile("/path/to/wordlist.txt", 3, 4)
     if err != nil {
         return err
     }

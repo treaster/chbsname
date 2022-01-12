@@ -1,4 +1,4 @@
-package chbsname
+package correcthorse
 
 import (
 	"bufio"
