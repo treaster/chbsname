@@ -19,7 +19,7 @@ goose`))
 
 	{
 		words.Seek(0, io.SeekStart)
-		b, err := chbsname.NewBuilder(words, 3, 5)
+		b, err := chbsname.NewBuilderFromReader(words, 3, 5)
 		require.NoError(t, err)
 		output := b.Generate(0)
 		require.Equal(t, "", output)
@@ -27,7 +27,7 @@ goose`))
 
 	{
 		words.Seek(0, io.SeekStart)
-		b, err := chbsname.NewBuilder(words, 3, 5)
+		b, err := chbsname.NewBuilderFromReader(words, 3, 5)
 		require.NoError(t, err)
 		output := b.Generate(1)
 		regex := "^(dog|cat|duck|goat|horse|goose)"
@@ -36,7 +36,7 @@ goose`))
 
 	{
 		words.Seek(0, io.SeekStart)
-		b, err := chbsname.NewBuilder(words, 3, 5)
+		b, err := chbsname.NewBuilderFromReader(words, 3, 5)
 		require.NoError(t, err)
 		output := b.Generate(2)
 		regex := "^(dog|cat|duck|goat|horse|goose)-(dog|cat|duck|goat|horse|goose)$"
@@ -55,7 +55,7 @@ goose
 
 	{
 		words.Seek(0, io.SeekStart)
-		b, err := chbsname.NewBuilder(words, 2, 4)
+		b, err := chbsname.NewBuilderFromReader(words, 2, 4)
 		require.NoError(t, err)
 		output := b.Generate(2)
 		regex := "^(dog|cat|duck|goat)-(dog|cat|duck|goat)$"
@@ -64,7 +64,7 @@ goose
 
 	{
 		words.Seek(0, io.SeekStart)
-		b, err := chbsname.NewBuilder(words, 4, 6)
+		b, err := chbsname.NewBuilderFromReader(words, 4, 6)
 		require.NoError(t, err)
 		output := b.Generate(2)
 		regex := "^(duck|goat|horse|goose)-(duck|goat|horse|goose)$"
@@ -73,7 +73,7 @@ goose
 
 	{
 		words.Seek(0, io.SeekStart)
-		b, err := chbsname.NewBuilder(words, 4, 4)
+		b, err := chbsname.NewBuilderFromReader(words, 4, 4)
 		require.NoError(t, err)
 		output := b.Generate(2)
 		regex := "^(duck|goat)-(duck|goat)$"
@@ -86,7 +86,7 @@ func TestChbs_Repeats(t *testing.T) {
 
 	{
 		words.Seek(0, io.SeekStart)
-		b, err := chbsname.NewBuilder(words, 2, 4)
+		b, err := chbsname.NewBuilderFromReader(words, 2, 4)
 		require.NoError(t, err)
 		output := b.Generate(4)
 		require.Equal(t, "dog-dog-dog-dog", output)
@@ -106,7 +106,7 @@ legalwordafterblankline
 `))
 
 	{
-		b, err := chbsname.NewBuilder(words, 0, 100)
+		b, err := chbsname.NewBuilderFromReader(words, 0, 100)
 		require.NoError(t, err)
 		output := b.Generate(1)
 		regex := "^(legalleadingspace|legaltrailingspace|legalwordafterblankline)$"

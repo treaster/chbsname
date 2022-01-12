@@ -14,12 +14,9 @@ type Builder interface {
 	Generate(int) string
 }
 
-func NewBuilder(words io.Reader, minLength int, maxLength int) (Builder, error) {
+func NewBuilderFromStrings(words []string, minLength int, maxLength int) (Builder, error) {
 	finalWords := []string{}
-	scanner := bufio.NewScanner(words)
-	for scanner.Scan() {
-		word := scanner.Text()
-		fmt.Println("consider", word)
+	for _, word := range words {
 		word = strings.TrimSpace(word)
 		if len(word) == 0 {
 			continue
@@ -31,7 +28,6 @@ func NewBuilder(words io.Reader, minLength int, maxLength int) (Builder, error) 
 			continue
 		}
 		if strings.ContainsAny(word, "- '\"") {
-			fmt.Println("discard", word)
 			continue
 		}
 		finalWords = append(finalWords, word)
@@ -46,6 +42,17 @@ func NewBuilder(words io.Reader, minLength int, maxLength int) (Builder, error) 
 	}, nil
 }
 
+func NewBuilderFromReader(words io.Reader, minLength int, maxLength int) (Builder, error) {
+	scanner := bufio.NewScanner(words)
+	wordsArr := []string{}
+	for scanner.Scan() {
+		word := scanner.Text()
+		wordsArr = append(wordsArr, word)
+	}
+
+	return NewBuilderFromStrings(wordsArr, minLength, maxLength)
+}
+
 func NewBuilderFromFile(wordsFilePath string, minLength int, maxLength int) (Builder, error) {
 	f, err := os.Open(wordsFilePath)
 	if err != nil {
@@ -53,7 +60,7 @@ func NewBuilderFromFile(wordsFilePath string, minLength int, maxLength int) (Bui
 	}
 	defer func() { _ = f.Close() }()
 
-	return NewBuilder(f, minLength, maxLength)
+	return NewBuilderFromReader(f, minLength, maxLength)
 }
 
 type builder struct {
