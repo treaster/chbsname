@@ -1,0 +1,16 @@
+*.log
+*.out
+*.6
+*.pyc
+*.swp
+*.db
+/src
+/pkg
+/bin
+/genfiles/
+bazel-*
+.cache
+terraform.tfstate.backup
+.lego
+.terraform
+/_run/
