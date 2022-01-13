@@ -97,6 +97,7 @@ func TestCorrectHorse_NoisyWordList(t *testing.T) {
 	words := bytes.NewReader([]byte(`
 illegalquote'
 illegalquote"
+#illegalhashcanuseascomment
 illegal space
 illegal-dash
 		legalleadingspace

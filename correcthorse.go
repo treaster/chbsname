@@ -27,7 +27,7 @@ func NewBuilderFromStrings(words []string, minLength int, maxLength int) (Builde
 		if len(word) > maxLength {
 			continue
 		}
-		if strings.ContainsAny(word, "- '\"") {
+		if strings.ContainsAny(word, "#- '\"") {
 			continue
 		}
 		finalWords = append(finalWords, word)
