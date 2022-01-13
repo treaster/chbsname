@@ -11,7 +11,7 @@ import (
 )
 
 type Builder interface {
-	Generate(int) string
+	Build(int) string
 }
 
 func NewBuilderFromStrings(words []string, minLength int, maxLength int) (Builder, error) {
@@ -37,7 +37,7 @@ func NewBuilderFromStrings(words []string, minLength int, maxLength int) (Builde
 		return nil, errors.New("No valid words found in words input")
 	}
 
-	return builder{
+	return generator{
 		finalWords,
 	}, nil
 }
@@ -63,15 +63,15 @@ func NewBuilderFromFile(wordsFilePath string, minLength int, maxLength int) (Bui
 	return NewBuilderFromReader(f, minLength, maxLength)
 }
 
-type builder struct {
+type generator struct {
 	words []string
 }
 
-func (b builder) Generate(count int) string {
+func (g generator) Build(count int) string {
 	components := make([]string, count)
 	for i := 0; i < count; i++ {
-		r := rand.Intn(len(b.words))
-		components[i] = b.words[r]
+		r := rand.Intn(len(g.words))
+		components[i] = g.words[r]
 	}
 
 	return strings.Join(components, "-")
